@@ -12,9 +12,13 @@ jobs:
   enable:
     runs-on: ubuntu-latest
     steps:
-      - name: Enable Pages
+      - name: Check token and enable Pages
         run: |
-          gh api --method POST /repos/${{ github.repository }}/pages \
-            -f "build_type=workflow" || echo "Enable failed, trying branch source"
+          echo "=== Token scopes ==="
+          curl -sI -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/user | grep -i "x-oauth-scopes" || echo "no scopes header"
+          echo "=== Try enable Pages with build_type=workflow ==="
+          gh api --method POST /repos/${{ github.repository }}/pages -f "build_type=workflow" 2>&1 || true
+          echo "=== Try GET pages ==="
+          gh api /repos/${{ github.repository }}/pages 2>&1 || true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
