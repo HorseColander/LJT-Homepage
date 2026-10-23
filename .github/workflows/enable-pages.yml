@@ -7,7 +7,6 @@ permissions:
   contents: read
   pages: write
   id-token: write
-  administration: write
 
 jobs:
   enable:
@@ -16,7 +15,6 @@ jobs:
       - name: Enable Pages
         run: |
           gh api --method POST /repos/${{ github.repository }}/pages \
-            -f "source[branch]=master" \
-            -f "source[path]=/" || echo "Pages may already be enabled"
+            -f "build_type=workflow" || echo "Enable failed, trying branch source"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
