@@ -4,7 +4,6 @@ on:
 permissions:
   pages: write
   contents: write
-  administration: write
   id-token: write
 jobs:
   debug:
