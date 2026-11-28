@@ -16,7 +16,7 @@ repository               : "HorseColander/LJT-Homepage"
 
 # Site Author
 author:
-  avatar           : "profile.png"
+  avatar           : "profile.svg"
   name             : "Junteng Liu"
   pronouns         :
   bio              : "First-year Ph.D. candidate at HKUST NLP Group"
